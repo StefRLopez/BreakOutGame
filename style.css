@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+}
+
+#canvas {
+    width: 900px;
+    height: 450px;
+    background-color: lightgrey;
+}
+
+.startNewGame {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
