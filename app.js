@@ -2,48 +2,25 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 
-function createRectangles(){
-    let rectangle = {
-        heigth: 20,
-        width: 100,
-        x: 10,
-        y: 70
-    }
-    for(let i = 0; i < 7; i++){
-        for(let j = 0; j < 4; j++){
-            ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.heigth)
-            rectangle.y += 30;
+function createRectangles() {
+    
+    for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 4; j++) {
+            let rectangle = {
+                height: 20,
+                width: 100,
+                x: 10 + i * 120, // Calculate x based on i
+                y: 70 + j * 30   // Calculate y based on j
+            }
+            ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+            rectanglesList.push(rectangle);
         }
-        rectangle.y = 70
-        rectangle.x += 120;
-    }
-}
-
-function saveRectangles(){
-    let rectangle = {
-        heigth: 20,
-        width: 100,
-        x: 10,
-        y: 70
-    }
-    for(let i = 0; i < 7; i++){
-        for(let j = 0; j < 4; j++){
-            rectangles.push(rectangle);
-            console.log(rectangle.y)
-            rectangle.y += 30;
-            
-        }
-        rectangle.y = 70
-        rectangle.x += 120;
     }
 }
 
 //list with the position of all rectangles
-let rectangles = []
+let rectanglesList = []
 
-saveRectangles()
-
-console.log(rectangles)
 
 /* Creates a moveable lower rectangle (subtract the xRectangle (100) from starting point) */
 document.addEventListener("keydown", handleKeyDown)
@@ -97,7 +74,6 @@ function changeBallDirection(){
     }
     if(yBall > 450 - ballRadius){
         //alert("Sorry, you lost")
-        console.log(rectangles)
     }
 }
 
