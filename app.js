@@ -2,25 +2,34 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 
-function createRectangles() {
-    
-    for (let i = 0; i < 7; i++) {
-        for (let j = 0; j < 4; j++) {
-            let rectangle = {
-                height: 20,
-                width: 100,
-                x: 10 + i * 120, // Calculate x based on i
-                y: 70 + j * 30   // Calculate y based on j
-            }
-            ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
-            rectanglesList.push(rectangle);
-        }
-    }
-}
-
 //list with the position of all rectangles
 let rectanglesList = []
 
+for (let i = 0; i < 7; i++) {
+    for (let j = 0; j < 4; j++) {
+        let rectangle = {
+            height: 20,
+            width: 100,
+            x: 10 + i * 120, // Calculate x based on i
+            y: 70 + j * 30   // Calculate y based on j
+        }
+        rectanglesList.push(rectangle)
+    }
+}
+
+console.log(rectanglesList)
+
+//funciton to redraw all rectangles
+function drawRectangles() {
+    
+    for (const rectangle of rectanglesList) {
+        ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+    }
+    //old programming loop
+    // for (let i = 0; i < rectanglesList; i++){
+    //      ctx.fillRect(rectanglesList[i].x, rectanglesList[i].y, rectanglesList[i].height, rectanglesList[i].width)
+    // }
+}
 
 /* Creates a moveable lower rectangle (subtract the xRectangle (100) from starting point) */
 document.addEventListener("keydown", handleKeyDown)
@@ -59,7 +68,12 @@ function createBall(){
 let distanceXBall = 1
 let distanceYBall = -1
 
-/* limit ball movement */
+/* limit ball movement on upper rectangles */
+function collision(){
+
+}
+
+/* limit ball movement on lower rectangle */
 function changeBallDirection(){
     xBall += distanceXBall
     yBall += distanceYBall
@@ -75,6 +89,12 @@ function changeBallDirection(){
     if(yBall > 450 - ballRadius){
         //alert("Sorry, you lost")
     }
+    for (let i=0; i<rectanglesList.length; i++){    
+        if(yBall < rectanglesList[i].y + ballRadius + rectanglesList[i].height){
+            distanceYBall = - distanceYBall
+            rectanglesList.splice(i,1)
+        }
+    }   
 }
 
 /* clears the whole canvas */
@@ -86,27 +106,10 @@ function clearLayout(){
 function drawLayout(){
     clearLayout()
     createRectangle()
-    createRectangles()
+    drawRectangles()
     createBall()
 }
 
 function startNewGame(){
     setInterval(drawLayout, 10)
 }
-
-
-
-
-
-
-
-/*
-const cursor = {
-    x: 0,
-     y: 0,
-   };
-   addEventListener("cursormove", function(event) {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-}
-*/
