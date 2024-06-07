@@ -1,6 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+let counter = 0
 
 //list with the position of all rectangles
 let rectanglesList = []
@@ -11,7 +12,8 @@ for (let i = 0; i < 7; i++) {
             height: 20,
             width: 100,
             x: 10 + i * 120, // Calculate x based on i
-            y: 70 + j * 30   // Calculate y based on j
+            y: 70 + j * 30,   // Calculate y based on j
+            visible: true
         }
         rectanglesList.push(rectangle)
     }
@@ -23,7 +25,9 @@ console.log(rectanglesList)
 function drawRectangles() {
     
     for (const rectangle of rectanglesList) {
-        ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+        if(rectangle.visible === true){
+            ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+        }
     }
     //old programming loop
     // for (let i = 0; i < rectanglesList; i++){
@@ -70,7 +74,23 @@ let distanceYBall = -1
 
 /* limit ball movement on upper rectangles */
 function collision(){
+    for (const rectangle of rectanglesList) {
+        if(rectangle.visible === true){
+            if(yBall < rectangle.y + ballRadius + rectangle.height && xBall + ballRadius > rectangle.x  && xBall - ballRadius < rectangle.x + rectangle.width){
+                distanceYBall = - distanceYBall
+                rectangle.visible = false
+                counter++
+                document.getElementById("counter").innerText = counter;
+            }
+        }
+    }
 
+    // for (let i=0; i<rectanglesList.length; i++){    
+    //     if(yBall < rectanglesList[i].y + ballRadius + rectanglesList[i].height){
+    //         distanceYBall = - distanceYBall
+    //         rectanglesList[i].visible = false
+    //     }
+    // }   
 }
 
 /* limit ball movement on lower rectangle */
@@ -89,12 +109,6 @@ function changeBallDirection(){
     if(yBall > 450 - ballRadius){
         //alert("Sorry, you lost")
     }
-    for (let i=0; i<rectanglesList.length; i++){    
-        if(yBall < rectanglesList[i].y + ballRadius + rectanglesList[i].height){
-            distanceYBall = - distanceYBall
-            rectanglesList.splice(i,1)
-        }
-    }   
 }
 
 /* clears the whole canvas */
@@ -108,6 +122,7 @@ function drawLayout(){
     createRectangle()
     drawRectangles()
     createBall()
+    collision()
 }
 
 function startNewGame(){
