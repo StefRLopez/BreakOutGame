@@ -2,11 +2,11 @@ body {
     text-align: center;
 }
 
-.counter-name {
+#counter-name {
     text-align: center;
 }
 
-#counter {
+.counter {
     color: black;
 }
 
@@ -20,4 +20,8 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+#gameover {
+    display: none;
 }

@@ -2,6 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let counter = 0
+let counters = document.getElementsByClassName("counter")
 
 //list with the position of all rectangles
 let rectanglesList = []
@@ -44,7 +45,7 @@ function handleKeyDown(event){
     }
     if(event.key === "ArrowLeft" && xRectangle > 0){
         xRectangle = xRectangle - distanceXRectangle
-    }       
+    }
 }
 
 let xRectangle = 100
@@ -80,7 +81,7 @@ function collision(){
                 distanceYBall = - distanceYBall
                 rectangle.visible = false
                 counter++
-                document.getElementById("counter").innerText = counter;
+                counters[0].innerHTML = counter
             }
         }
     }
@@ -107,7 +108,11 @@ function changeBallDirection(){
         distanceYBall = - distanceYBall
     }
     if(yBall > 450 - ballRadius){
-        //alert("Sorry, you lost")
+        clearInterval(intervalID);
+        let gameOverBox = document.getElementById("gameover")
+        gameOverBox.style.display = "block";
+        counters[1].innerHTML = counter
+        document.getElementById("counter-name").style.display = "none";
     }
 }
 
@@ -125,6 +130,8 @@ function drawLayout(){
     collision()
 }
 
+let intervalID;
+
 function startNewGame(){
-    setInterval(drawLayout, 10)
+    intervalID = setInterval(drawLayout, 10)
 }
