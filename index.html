@@ -7,15 +7,17 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Breakout Game</h1>
+    <h1 class="headline">Breakout Game</h1>
     <div id="counter-name">Total: <span class="counter">0</span></div>
-    <canvas id="canvas" width="840" height="450"></canvas>
-    <div class="startNewGame">
-        <button onclick="startNewGame()">Start New Game</button>
-    </div>
-    <div id="gameover">
-        <p>Start Another Game</p>
-        <p>Total: <span class="counter"></span></p>
+    <div class="game-container">
+        <canvas id="canvas" width="840" height="450"></canvas>
+        <div class="new-game-container">
+            <button id="start-new-game" onclick="startNewGame()">Start New Game</button>
+        </div>
+        <div id="gameover">
+            <p>Total: <span class="counter"></span></p>
+            <button onclick="restartGame()">Start New Game</button>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>

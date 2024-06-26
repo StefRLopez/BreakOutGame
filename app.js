@@ -7,18 +7,22 @@ let counters = document.getElementsByClassName("counter")
 //list with the position of all rectangles
 let rectanglesList = []
 
-for (let i = 0; i < 7; i++) {
-    for (let j = 0; j < 4; j++) {
-        let rectangle = {
-            height: 20,
-            width: 100,
-            x: 10 + i * 120, // Calculate x based on i
-            y: 70 + j * 30,   // Calculate y based on j
-            visible: true
+function createList(){
+    for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 4; j++) {
+            let rectangle = {
+                height: 20,
+                width: 100,
+                x: 10 + i * 120, // Calculate x based on i
+                y: 70 + j * 30,   // Calculate y based on j
+                visible: true
+            }
+            rectanglesList.push(rectangle)
         }
-        rectanglesList.push(rectangle)
     }
 }
+
+createList()
 
 console.log(rectanglesList)
 
@@ -134,4 +138,16 @@ let intervalID;
 
 function startNewGame(){
     intervalID = setInterval(drawLayout, 10)
+    document.getElementById("start-new-game").style.display = "none";
+}
+
+function restartGame(){
+    xBall = Math.floor(Math.random() * (800 - 100 + 1)) + 100;
+    yBall = Math.floor(Math.random() * (400 - 160 + 1)) + 160;
+    distanceXBall = - distanceXBall
+    distanceYBall = - distanceYBall
+    rectanglesList = [];
+    createList();
+    startNewGame();
+    document.getElementById("gameover").style.display = "none";
 }

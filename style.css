@@ -2,26 +2,52 @@ body {
     text-align: center;
 }
 
+.headline{
+    margin-bottom: 50px;
+}
+
 #counter-name {
     text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 13%;
+    transform: translate(-50%, -50%);
 }
 
 .counter {
     color: black;
 }
 
+.game-container{
+    background-color: lightgrey;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
 #canvas {
     width: 900px;
     height: 450px;
-    background-color: lightgrey;
+    background-color: ivory;
+    margin-bottom: 20px;
+
 }
 
-.startNewGame {
+.new-game-container {
     display: flex;
     justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin-top: 10px;
 }
 
 #gameover {
     display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: ivory;
+    padding: 1rem;
+    border: 5px solid lightgrey;
 }
